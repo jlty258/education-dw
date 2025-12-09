@@ -1,0 +1,80 @@
+{
+  "$id": "https://education-dw.com/schemas/students/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Students Data Source v1",
+  "type": "object",
+  "description": "学员数据源 Schema",
+  "properties": {
+    "student_id": {
+      "type": "string",
+      "description": "学员ID",
+      "pattern": "^[0-9]+$"
+    },
+    "student_name": {
+      "type": "string",
+      "description": "学员姓名",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "phone": {
+      "type": "string",
+      "description": "手机号",
+      "pattern": "^1[3-9][0-9]{9}$",
+      "nullable": true
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "邮箱",
+      "nullable": true
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["1", "2"],
+      "description": "性别：1-男，2-女",
+      "nullable": true
+    },
+    "age": {
+      "type": "string",
+      "description": "年龄",
+      "pattern": "^[0-9]+$",
+      "nullable": true
+    },
+    "province": {
+      "type": "string",
+      "description": "省份",
+      "nullable": true
+    },
+    "city": {
+      "type": "string",
+      "description": "城市",
+      "nullable": true
+    },
+    "district": {
+      "type": "string",
+      "description": "区县",
+      "nullable": true
+    },
+    "register_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "注册时间",
+      "nullable": true
+    },
+    "vip_level": {
+      "type": "string",
+      "enum": ["0", "1", "2", "3"],
+      "description": "VIP等级：0-普通，1-银卡，2-金卡，3-钻石",
+      "default": "0"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["0", "1"],
+      "description": "状态：0-禁用，1-正常",
+      "default": "1"
+    }
+  },
+  "required": ["student_id", "student_name"],
+  "additionalProperties": true
+}
+

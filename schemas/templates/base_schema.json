@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Base Schema Template",
+  "type": "object",
+  "description": "基础 Schema 模板，所有数据源 Schema 应继承此模板",
+  "properties": {
+    "source_system": {
+      "type": "string",
+      "description": "数据源系统名称"
+    },
+    "ingest_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "数据摄入时间"
+    },
+    "version": {
+      "type": "string",
+      "description": "Schema 版本号"
+    }
+  },
+  "required": ["source_system", "ingest_time"],
+  "additionalProperties": true
+}
+

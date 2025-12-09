@@ -1,0 +1,72 @@
+{
+  "$id": "https://education-dw.com/schemas/orders/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Orders Data Source v1",
+  "type": "object",
+  "description": "订单数据源 Schema",
+  "properties": {
+    "order_id": {
+      "type": "string",
+      "description": "订单ID",
+      "pattern": "^[0-9]+$"
+    },
+    "order_no": {
+      "type": "string",
+      "description": "订单号",
+      "minLength": 1
+    },
+    "student_id": {
+      "type": "string",
+      "description": "学员ID",
+      "pattern": "^[0-9]+$"
+    },
+    "course_id": {
+      "type": "string",
+      "description": "课程ID",
+      "pattern": "^[0-9]+$"
+    },
+    "order_amount": {
+      "type": "string",
+      "description": "订单金额",
+      "pattern": "^[0-9]+(\\.[0-9]{1,2})?$"
+    },
+    "discount_amount": {
+      "type": "string",
+      "description": "优惠金额",
+      "pattern": "^[0-9]+(\\.[0-9]{1,2})?$",
+      "default": "0.00"
+    },
+    "paid_amount": {
+      "type": "string",
+      "description": "实付金额",
+      "pattern": "^[0-9]+(\\.[0-9]{1,2})?$"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": ["1", "2", "3"],
+      "description": "支付方式：1-微信，2-支付宝，3-银行卡",
+      "nullable": true
+    },
+    "order_status": {
+      "type": "string",
+      "enum": ["0", "1", "2", "3"],
+      "description": "订单状态：0-待支付，1-已支付，2-已取消，3-已退款",
+      "default": "0"
+    },
+    "order_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "下单时间",
+      "nullable": true
+    },
+    "pay_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "支付时间",
+      "nullable": true
+    }
+  },
+  "required": ["order_id", "order_no", "student_id", "course_id", "order_amount", "paid_amount"],
+  "additionalProperties": true
+}
+

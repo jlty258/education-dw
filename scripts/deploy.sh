@@ -83,6 +83,15 @@ if command -v python3 &> /dev/null; then
     docker exec -i "$MYSQL_CONTAINER" mysql -u"$DB_USER" -p"$DB_PASS" "$DB_NAME" < "$SCRIPT_DIR/etl_dwd_to_dws.sql"
     docker exec -i "$MYSQL_CONTAINER" mysql -u"$DB_USER" -p"$DB_PASS" "$DB_NAME" < "$SCRIPT_DIR/etl_dwd_to_ads.sql"
     echo -e "${GREEN}✓ 数据清洗和转换完成${NC}"
+    
+    # 数据质量检查（可选，需要安装data-diff）
+    if command -v python3 &> /dev/null && python3 -c "import data_diff" 2>/dev/null; then
+        echo -e "${YELLOW}执行数据质量检查...${NC}"
+        python3 "$SCRIPT_DIR/data_quality_check.py" || echo -e "${YELLOW}数据质量检查失败（可忽略）${NC}"
+    else
+        echo -e "${YELLOW}跳过数据质量检查（未安装data-diff）${NC}"
+        echo -e "${YELLOW}安装方法: cd ../../data-diff && pip install -e .${NC}"
+    fi
 else
     echo -e "${RED}警告：未找到python3，跳过测试数据生成${NC}"
     echo -e "${YELLOW}请手动运行: python3 $SCRIPT_DIR/generate_test_data.py${NC}"
